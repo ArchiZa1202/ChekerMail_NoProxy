@@ -25,7 +25,7 @@
                     </Button.Background>
                 </Button>
                 <Button Content="Open List" Width="171" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                        FontSize="20" Foreground="#FCC100" Margin="300,0,0,260">
+                        FontSize="20" Foreground="#FCC100" Margin="300,0,0,260" Click="Button_Click">
                     <Button.Background>
                         <LinearGradientBrush>
                             <GradientStop Color="Black" Offset="0"/>

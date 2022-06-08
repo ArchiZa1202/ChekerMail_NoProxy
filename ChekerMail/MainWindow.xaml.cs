@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Microsoft.Win32;
 namespace ChekerMail
 {
     /// <summary>
@@ -23,6 +23,19 @@ namespace ChekerMail
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.FileName = "Document";
+            dialog.DefaultExt = ".txt";
+            dialog.Filter = "Text documents (.txt|*.txt";
+            bool? result = dialog.ShowDialog();
+            if (result == true) 
+            {
+                
+            }
         }
     }
 }
