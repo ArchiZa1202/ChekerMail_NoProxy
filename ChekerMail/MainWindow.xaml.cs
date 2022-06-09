@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.IO;
 namespace ChekerMail
 {
     /// <summary>
@@ -20,6 +21,7 @@ namespace ChekerMail
     /// </summary>
     public partial class MainWindow : Window
     {
+        Accounts accont; 
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +36,8 @@ namespace ChekerMail
             bool? result = dialog.ShowDialog();
             if (result == true) 
             {
-                
+                accont = new Accounts(File.ReadAllLines(dialog.FileName));
+                lbltotalAccounts.Content = accont.AddLabelProcess();
             }
         }
     }
