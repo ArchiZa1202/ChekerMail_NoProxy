@@ -70,9 +70,17 @@
 
 
 
-        <TabItem Header="TabItem" Foreground="#FCC100" Background="#191529">
-            <Grid Background="#FFE5E5E5"/>
+        <TabItem Header="Result" Foreground="#FCC100" Background="#191529">
+            <Grid >
+                <Grid.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#0c0c14" Offset="0"/>
+                        <GradientStop Color="#191529" Offset="1.3"/>
+                    </RadialGradientBrush>
+                </Grid.Background>
+                <TextBox x:Name="txtResult" HorizontalAlignment="Left" Height="330"
+                         Margin="10,51,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="764"/>
+            </Grid>
         </TabItem>
     </TabControl>
-
 </Window>

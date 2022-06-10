@@ -21,7 +21,7 @@ namespace ChekerMail
     /// </summary>
     public partial class MainWindow : Window
     {
-        Accounts accont; 
+        Accounts account; 
         public MainWindow()
         {
             InitializeComponent();
@@ -36,8 +36,8 @@ namespace ChekerMail
             bool? result = dialog.ShowDialog();
             if (result == true) 
             {
-                accont = new Accounts(File.ReadAllLines(dialog.FileName));
-                lbltotalAccounts.Content = accont.AddLabelProcess();
+                account = new Accounts(File.ReadAllLines(dialog.FileName));
+                lbltotalAccounts.Content = account.AddLabelProcess();
             }
         }
     }
