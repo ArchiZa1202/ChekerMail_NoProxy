@@ -39,6 +39,27 @@ namespace ChekerMail
                 account = new Accounts(File.ReadAllLines(dialog.FileName));
                 lbltotalAccounts.Content = account.AddLabelProcess();
             }
+            return;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (account == null) 
+            {
+                MessageBox.Show("Отсутствует список аккаунтов");
+                return;
+            }
+            account.G_B_inP_P += (g, b, inP, Proc) =>
+            {
+                lblGood.Content = g;
+                lblBad.Content = b;
+                lblinProcessing.Content = inP;
+                lblProcessed.Content = Proc;
+            };
+            account.result += (r) =>
+            {
+                txtResult.Text += r;
+            };
         }
     }
 }

